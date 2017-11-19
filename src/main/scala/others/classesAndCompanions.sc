@@ -39,5 +39,19 @@ val a3 = A { x => (x+10, x-10) }
 
 a1.foo
 
+/**
+  * If you want to name a variable with a
+  * reserved keyword in scala you can use the backtick
+  * " `` "
+  * This is very useful when you have a json
+  * which fields are named as reserved keywords
+  * then you can name the class fields using the backticks
+  * and everything should work fine
+  */
+case class B(`class`:String)
+
+val b1 = B("B")
+b1.`class`
+
 
 

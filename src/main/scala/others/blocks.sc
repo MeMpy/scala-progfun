@@ -98,3 +98,40 @@ f{
   }
 }
 
+
+/**
+  * Partial function:
+  * Function not defined for every input
+  * PartialFunction[A,B]
+  *
+  * In scala it's possible to define such function
+  * implementing that trait.
+  * You should implement the apply function and
+  * the definedAt
+  */
+
+val divide42By = new PartialFunction[Int, Int] {
+  def apply(a: Int):Int= 43 / a
+  def isDefinedAt(a:Int) = a != 0
+}
+
+divide42By.isDefinedAt(10)
+divide42By(10)
+divide42By.isDefinedAt(0)
+
+/**
+  * There are two powerful things to say about the partial function
+  * 1) They can be defined in terms of pattern matching in only one block
+  * 2) isDefinedAt is often internally used by other library methods es collect
+  */
+
+val divide10By : PartialFunction[Int, Int] = {
+  case x:Int if x != 0 => 10 / x
+}
+
+divide10By.isDefinedAt(0)
+
+List(10,1,0).collect(divide10By)
+
+//the following line will throw an exception
+//List(10,1,0).map(divide10By)
